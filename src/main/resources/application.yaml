@@ -1,5 +1,5 @@
 server:
-    port: 41000
+    port: 41099
 spring:
     datasource:
         url: jdbc:mysql://localhost/pengeluaranku?useSSL=false&serverTimezone=Asia/Jakarta&verifyServerCertificate=false
