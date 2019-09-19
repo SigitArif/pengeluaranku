@@ -22,7 +22,7 @@ public interface UserService{
         return null;
     }
 
-    default List<UserResVO> findAll(String uuid){
+    default List<UserResVO> findAll(){
         return null;
     }
    
