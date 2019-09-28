@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pengeluaranku v1</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="pengeluaranku-client.js"></script>
+</head>
+
+<body>
+<div>
+    <h1>Welcome to Pengeluaranku App</h1>
+    <h2>Choose menu:</h2>
+    <p>
+        <form action="">
+            <a href="#tambahpengeluaran">Tambah Pengeluaran</a></br>
+            <a href="#tambahtransaksi"> Tambah Transaksi</a></br>
+            <a href="#register"> Register</a>
+          </form>
+    </p>
+    
+</br>
+</br>
+</br>
+</br>
+    <!-- Tambah Pengeluaran -->
+    <h2></a>Tambah Pengeluaran</h2>
+    <form id="tambah-pengeluaran">
+        <table>
+            <tr>
+            <td>Nama Pengeluaran</td> 
+            <td><input type="text" name="nama-pengeluaran"></td>
+            </tr>
+            <tr>
+                <td>Kode Pengeluaran</td>
+                <td><input type="text" name="kode-pengeluaran"></td>    
+            </tr>
+            <tr>
+                <td>Tipe</td>
+                <td><input type="radio" name="tipe-pengeluaran" value="D">Debit
+                <input type="radio" name="tipe-pengeluaran" value="K">Kredit</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit"></td>
+                    
+            </tr>
+            
+        </table>
+    </form>
+
+<!-- Tambah Transaksi -->
+<h2><a id="tambah-transaksi"></a>Tambah Transaksi</h2>
+<form action="">
+    <table>
+        <tr>
+        <td>Nama Pengeluaran</td> 
+        <td><input type="text" name="nama-pengeluaran-exist"></td>
+        </tr>
+        <tr>
+            <td>Besar Pengeluaran</td>
+            <td><input type="text" name="besar-pengeluaran"></td>    
+        </tr>
+        <tr>
+            <td>Keterangan</td>
+            <td><input type="text" name="keterangan"></td</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit"></td>
+                
+        </tr>
+        
+    </table>
+</form>
+
+</div>
+
+</body>
+</html>
