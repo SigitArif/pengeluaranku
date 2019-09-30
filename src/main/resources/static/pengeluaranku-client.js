@@ -10,14 +10,14 @@ $(document).ready(function() {
         var $form = $( this ),
             namaPengeluaran = $form.find( "input[name='nama-pengeluaran']" ).val(),
             kodePengeluaran = $form.find( "input[name='kode-pengeluaran']" ).val(),
-            tipePengeluaran = $form.find( "input[name='tipe-pengeluaran']" ).val();
+            tipePengeluaran = $form.find( "input[name='tipe-pengeluaran']:checked" ).val();
 
         // Compose the data in the format that the API is expecting
         var data = { name: namaPengeluaran, code: kodePengeluaran, type: tipePengeluaran};
 
         // Send the data using post
         $.ajax({
-            url: 'http://http://localhost:41099/pengeluaranku-service/api/v1/pengeluaran/add',
+            url: 'http://localhost:41099/pengeluaranku-service/api/v1/pengeluaran/add',
             type: 'POST',
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
