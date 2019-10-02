@@ -19,6 +19,6 @@ import org.mapstruct.factory.Mappers;
         nullValuePropertyMappingStrategy = IGNORE)
 public interface UserMapper extends BaseMapper<User, UserReqVO>{
  UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
-     User reqVOtoUser(UserReqVO vo);
+     
 
 }
