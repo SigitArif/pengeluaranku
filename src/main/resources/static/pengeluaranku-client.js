@@ -24,10 +24,12 @@ $(document).ready(function() {
             dataType: "json",
             async: false,
             success: function(result){
-                if(result.correct) {
-                    $('.result-message').empty().append("Selamat! Pengeluaranmu Berhasil Terdaftar");
+                if(result!=null) {
+                    // $('.result-message').empty().append("Selamat! Pengeluaranmu Berhasil Terdaftar");
+                    alert("Selamat! Pengeluaranmu Berhasil Terdaftar");
                 } else {
-                    $('.result-message').empty().append("Yah Pengeluaran Gagal Didaftarkan");
+                    alert("Yah Pengeluaran Gagal Didaftarkan");
+                    // $('.result-message').empty().append("Yah Pengeluaran Gagal Didaftarkan");
                 }
             }
         });
