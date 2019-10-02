@@ -11,6 +11,7 @@ public class UserReqVO{
     private String address;
     @NotBlank(message = "Phone can't be empty")
     private String phone;
+    @NotBlank(message = "Email can't be empty")
     private String email;
     public UserReqVO(){};
 
