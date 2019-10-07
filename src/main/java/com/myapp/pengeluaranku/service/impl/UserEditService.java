@@ -40,6 +40,7 @@ public class UserEditService implements UserService {
             user.setAddress(vo.getAddress());
         }
         user.setPhone(vo.getPhone());
+        
         userRepository.save(user);
         
         return "User successfully added";

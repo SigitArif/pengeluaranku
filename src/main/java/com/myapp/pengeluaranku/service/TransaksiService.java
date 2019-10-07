@@ -37,7 +37,7 @@ TransaksiRepository transaksiRepository;
          if(message!=null) throw new PengeluarankuException(message, HttpStatus.BAD_REQUEST, StatusCode.ERROR);
         Transaksi model = new Transaksi();
         Pengeluaran pengeluaran = pengeluaranRepository.findByName(vo.getName());
-        User user = userRepository.findByUuid("abcde");
+        User user = userRepository.findByUuid("63800da4-0d02-4746-98c3-b6b902d3c509");
         model.setAmount(vo.getAmount());
         model.setPengeluaran(pengeluaran);
         model.setUser(user);
