@@ -50,6 +50,8 @@ public abstract class Base implements Serializable{
     @Column(name = "MODIFIED_BY", length = 50)
     private String modifiedBy;
     
+    @Column(name = "IS_DELETE", nullable = true)
+    private Date isDelete;
     @PrePersist
     public void prePersist(){
         this.uuid = UUID.randomUUID().toString();
