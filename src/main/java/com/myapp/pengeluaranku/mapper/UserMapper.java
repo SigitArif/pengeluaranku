@@ -6,6 +6,7 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 import com.myapp.pengeluaranku.domain.User;
 import com.myapp.pengeluaranku.vo.UserReqVO;
+import com.myapp.pengeluaranku.vo.UserResVO;
 
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -17,7 +18,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValueCheckStrategy = ALWAYS,
         nullValuePropertyMappingStrategy = IGNORE)
-public interface UserMapper extends BaseMapper<User, UserReqVO>{
+public interface UserMapper extends BaseMapper<User, UserReqVO, UserResVO>{
  UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
      
 
