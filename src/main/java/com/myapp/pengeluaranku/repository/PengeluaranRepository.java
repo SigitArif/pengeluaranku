@@ -11,4 +11,6 @@ public interface PengeluaranRepository extends JpaRepository<Pengeluaran,Integer
 
 	Pengeluaran findByName(String name);
 
+	Pengeluaran findByUuid(String uuid);
+
 }

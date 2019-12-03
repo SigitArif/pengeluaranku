@@ -1,7 +1,9 @@
 package com.myapp.pengeluaranku.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -9,6 +11,7 @@ import com.myapp.pengeluaranku.domain.Pengeluaran;
 import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.exception.PengeluarankuException;
 import com.myapp.pengeluaranku.repository.PengeluaranRepository;
+import com.myapp.pengeluaranku.util.ValidationUtil;
 import com.myapp.pengeluaranku.validator.PengeluaranValidator;
 import com.myapp.pengeluaranku.vo.PengeluaranRequestVO;
 
@@ -41,6 +44,21 @@ public String add(PengeluaranRequestVO vo){
 
 }
 
+public String edit(PengeluaranRequestVO vo, String uuid){
+    // validate input
+    pengeluaranValidator.validateEdit(vo, uuid);
+    Pengeluaran pengeluaran = pengeluaranRepository.findByUuid(uuid);
+    pengeluaran.setName(vo.getName());
+    pengeluaran.setCode(vo.getCode());
+    pengeluaran.setType(vo.getType());
+    pengeluaran.setModificationDate(new Date());
+    pengeluaran.setModifiedBy("sigit");
+    pengeluaranRepository.saveAndFlush(pengeluaran);
+
+
+    return "Pengeluaran sukses terupdate";
+}
+
 public List<String> getAll(){
     List<Pengeluaran> listPengeluaran = pengeluaranRepository.findAll();
     List<String> vos = new ArrayList<>();
@@ -50,5 +68,19 @@ public List<String> getAll(){
     System.out.println(vos);
         return vos;
     
+}
+
+public String delete(String uuid) {
+    if(ValidationUtil.isEmptyOrNull(uuid)){
+        throw new PengeluarankuException("Uuid can't be empty", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
+    }
+    else{
+        Pengeluaran pengeluaran = pengeluaranRepository.findByUuid(uuid);
+        if(pengeluaran == null){
+            throw new PengeluarankuException("Pengeluaran not found", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
+        }
+        pengeluaranRepository.delete(pengeluaran);
+    }
+	return null;
 }
 }
