@@ -1,5 +1,7 @@
 package com.myapp.pengeluaranku.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import com.myapp.pengeluaranku.domain.Pengeluaran;
@@ -7,11 +9,13 @@ import com.myapp.pengeluaranku.domain.Transaksi;
 import com.myapp.pengeluaranku.domain.User;
 import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.exception.PengeluarankuException;
+import com.myapp.pengeluaranku.mapper.TransaksiMapper;
 import com.myapp.pengeluaranku.repository.PengeluaranRepository;
 import com.myapp.pengeluaranku.repository.TransaksiRepository;
 import com.myapp.pengeluaranku.repository.UserRepository;
 import com.myapp.pengeluaranku.validator.TransaksiValidator;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
+import com.myapp.pengeluaranku.vo.TransaksiResVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +35,8 @@ UserRepository userRepository;
 
 @Autowired
 TransaksiRepository transaksiRepository;
+@Autowired
+TransaksiMapper transaksiMapper;
 
     public String add(TransaksiReqVO vo){
         String message = transaksiValidator.validateTransaksi(vo);
@@ -45,5 +51,11 @@ TransaksiRepository transaksiRepository;
         transaksiRepository.save(model);
          return "Data saved";
 
-    } 
+    }
+
+	public List<TransaksiResVO> list() {
+        List<Transaksi> transaksi = transaksiRepository.findAll();
+        List<TransaksiResVO> result = transaksiMapper.toVO(transaksi);
+		return result;
+	} 
 }
