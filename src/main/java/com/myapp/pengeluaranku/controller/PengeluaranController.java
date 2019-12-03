@@ -7,6 +7,7 @@ import javax.xml.ws.Response;
 import com.myapp.pengeluaranku.service.PengeluaranService;
 import com.myapp.pengeluaranku.util.RestUtil;
 import com.myapp.pengeluaranku.vo.PengeluaranRequestVO;
+import com.myapp.pengeluaranku.vo.PengeluaranResponseVO;
 import com.myapp.pengeluaranku.vo.ResultVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,17 @@ public class PengeluaranController{
         ResultVO result = new ResultVO();
         String results = pengeluaranService.delete(uuid);
         result.setMessage("Pengeluaran terhapus");
+        result.setResults(results);
+        result.setStatus(200);
+
+        return RestUtil.getJsonResponse(result);
+        
+    }
+    @GetMapping(value="/list")
+    public ResponseEntity<ResultVO> list(){
+        ResultVO result = new ResultVO();
+        List<PengeluaranResponseVO> results = pengeluaranService.list();
+        result.setMessage("Pengeluaran diperoleh");
         result.setResults(results);
         result.setStatus(200);
 

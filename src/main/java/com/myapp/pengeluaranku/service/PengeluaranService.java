@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import com.myapp.pengeluaranku.domain.Pengeluaran;
 import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.exception.PengeluarankuException;
+import com.myapp.pengeluaranku.mapper.PengeluaranMapper;
 import com.myapp.pengeluaranku.repository.PengeluaranRepository;
 import com.myapp.pengeluaranku.util.ValidationUtil;
 import com.myapp.pengeluaranku.validator.PengeluaranValidator;
 import com.myapp.pengeluaranku.vo.PengeluaranRequestVO;
+import com.myapp.pengeluaranku.vo.PengeluaranResponseVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +31,9 @@ PengeluaranRepository pengeluaranRepository;
 
 @Autowired
 PengeluaranValidator pengeluaranValidator;
+
+@Autowired
+    PengeluaranMapper pengeluaranMapper;
 
 @Transactional
 public String add(PengeluaranRequestVO vo){
@@ -83,4 +89,11 @@ public String delete(String uuid) {
     }
 	return null;
 }
+
+public List<PengeluaranResponseVO> list(){
+    List<Pengeluaran> result = pengeluaranRepository.findAll();
+    List<PengeluaranResponseVO> response = pengeluaranMapper.toVO(result);
+    return response;
+}
+
 }
