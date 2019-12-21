@@ -61,8 +61,12 @@ TransaksiMapper transaksiMapper;
 	}
 
 	public String addTransaksi(TransaksiReqVO2 vo) {
+        String message = transaksiValidator.validateTransaksi2(vo);
+         if(message!=null) throw new PengeluarankuException(message, HttpStatus.BAD_REQUEST, StatusCode.ERROR);
         Pengeluaran pengeluaran = pengeluaranRepository.findByUuid(vo.getPengeluaranId());
+        if(pengeluaran==null) throw new PengeluarankuException("User Not Found", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
         User user = userRepository.findByUuid(vo.getUserId());
+        if(user==null) throw new PengeluarankuException("Pengeluaran Not Found", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
         Transaksi transaksi = new Transaksi();
         transaksi.setAmount(vo.getAmount());
         transaksi.setCreatedBy(user.getName());

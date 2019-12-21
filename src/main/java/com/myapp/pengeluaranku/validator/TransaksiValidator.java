@@ -5,7 +5,9 @@ import java.util.Map;
 
 import com.myapp.pengeluaranku.domain.Pengeluaran;
 import com.myapp.pengeluaranku.repository.PengeluaranRepository;
+import com.myapp.pengeluaranku.util.ValidationUtil;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
+import com.myapp.pengeluaranku.vo.TransaksiReqVO2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,5 +38,13 @@ PengeluaranRepository pengeluaranRepository;
 
         return null;
 
+    }
+    public String validateTransaksi2(TransaksiReqVO2 vo){
+        if(ValidationUtil.isEmptyOrNull(vo.getUserId())) return "User id can't be empty";
+        if(ValidationUtil.isEmptyOrNull(vo.getPengeluaranId())) return "Pengeluaran id can't be empty";
+        if(ValidationUtil.isEmptyOrNull(vo.getAmount())) return "Amount can't be empty";
+        if(ValidationUtil.isEmptyOrNull(vo.getDetailTransaksi())) return "Detail transaksi can't be empty";
+        return null;
+        
     }
 }
