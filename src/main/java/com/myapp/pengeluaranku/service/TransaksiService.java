@@ -15,6 +15,7 @@ import com.myapp.pengeluaranku.repository.TransaksiRepository;
 import com.myapp.pengeluaranku.repository.UserRepository;
 import com.myapp.pengeluaranku.validator.TransaksiValidator;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
+import com.myapp.pengeluaranku.vo.TransaksiReqVO2;
 import com.myapp.pengeluaranku.vo.TransaksiResVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,18 @@ TransaksiMapper transaksiMapper;
         List<Transaksi> transaksi = transaksiRepository.findAll();
         List<TransaksiResVO> result = transaksiMapper.toVO(transaksi);
 		return result;
+	}
+
+	public String addTransaksi(TransaksiReqVO2 vo) {
+        Pengeluaran pengeluaran = pengeluaranRepository.findByUuid(vo.getPengeluaranId());
+        User user = userRepository.findByUuid(vo.getUserId());
+        Transaksi transaksi = new Transaksi();
+        transaksi.setAmount(vo.getAmount());
+        transaksi.setCreatedBy(user.getName());
+        transaksi.setDetailTransaksi(vo.getDetailTransaksi());
+        transaksi.setUser(user);
+        transaksi.setPengeluaran(pengeluaran);
+        transaksiRepository.save(transaksi);
+        return "Data saved";
 	} 
 }

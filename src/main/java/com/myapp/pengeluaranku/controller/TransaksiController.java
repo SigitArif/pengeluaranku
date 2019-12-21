@@ -11,6 +11,7 @@ import com.myapp.pengeluaranku.util.RestUtil;
 import com.myapp.pengeluaranku.vo.PengeluaranRequestVO;
 import com.myapp.pengeluaranku.vo.ResultVO;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
+import com.myapp.pengeluaranku.vo.TransaksiReqVO2;
 import com.myapp.pengeluaranku.vo.TransaksiResVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,20 @@ public class TransaksiController{
         return RestUtil.getJsonResponse(result);
         
     }
+
+    @PostMapping(value="/add-transaksi")
+    @ResponseBody
+    public ResponseEntity<ResultVO> addTransaksi(@RequestBody TransaksiReqVO2 vo){
+        ResultVO result = new ResultVO();
+        String results = transaksiService.addTransaksi(vo);
+        result.setMessage(StatusCode.OK.toString());
+        result.setResults(results);
+        result.setStatus(200);
+
+        return RestUtil.getJsonResponse(result);
+        
+    }
+    
 
     @GetMapping(value="/list")
     @ResponseBody
