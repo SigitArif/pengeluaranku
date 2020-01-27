@@ -16,10 +16,12 @@ import com.myapp.pengeluaranku.vo.TransaksiResVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -67,6 +69,16 @@ public class TransaksiController{
 
         return RestUtil.getJsonResponse(result);
         
+    }
+
+    @DeleteMapping(value="/delete")
+    public ResponseEntity<ResultVO> delete(@RequestParam(value="uuid", required = false) String uuid){
+        ResultVO result = new ResultVO();
+        String results = transaksiService.deleteTransaksi(uuid);
+        result.setMessage(StatusCode.OK.toString());
+        result.setResults(results);
+        result.setStatus(200);
+        return RestUtil.getJsonResponse(result);
     }
     
 }

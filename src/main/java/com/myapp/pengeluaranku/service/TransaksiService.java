@@ -13,6 +13,7 @@ import com.myapp.pengeluaranku.mapper.TransaksiMapper;
 import com.myapp.pengeluaranku.repository.PengeluaranRepository;
 import com.myapp.pengeluaranku.repository.TransaksiRepository;
 import com.myapp.pengeluaranku.repository.UserRepository;
+import com.myapp.pengeluaranku.util.ValidationUtil;
 import com.myapp.pengeluaranku.validator.TransaksiValidator;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO2;
@@ -75,5 +76,18 @@ TransaksiMapper transaksiMapper;
         transaksi.setPengeluaran(pengeluaran);
         transaksiRepository.save(transaksi);
         return "Data saved";
-	} 
+    } 
+    public String deleteTransaksi(String uuid){
+        if(ValidationUtil.isEmptyOrNull(uuid)){
+            throw new PengeluarankuException("Uuid can't be empty", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
+        }
+        else{
+            Transaksi transaksi = transaksiRepository.findByUuid(uuid);
+            if(transaksi == null){
+                throw new PengeluarankuException("Transaksi not found", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
+            }
+            transaksiRepository.delete(transaksi);
+        }
+        return "Transaksi terhapus";
+    }
 }
