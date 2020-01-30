@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2019-12-21T13:28:59+0700",
+    date = "2020-01-28T16:24:34+0700",
     comments = "version: 1.3.0.Beta2, compiler: javac, environment: Java 1.8.0_201 (Oracle Corporation)"
 )
 @Component
@@ -32,6 +32,9 @@ public class TransaksiMapperImpl implements TransaksiMapper {
         }
         if ( model.getDetailTransaksi() != null ) {
             transaksiResVO.setDetailTransaksi( model.getDetailTransaksi() );
+        }
+        if(model.getPengeluaran().getName()!=null){
+            transaksiResVO.setName(model.getPengeluaran().getName());
         }
 
         return transaksiResVO;
