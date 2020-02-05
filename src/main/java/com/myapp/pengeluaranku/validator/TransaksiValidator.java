@@ -28,6 +28,8 @@ PengeluaranRepository pengeluaranRepository;
         mandatories.put("Name", (T) vo.getName());
         mandatories.put("Amount", (T) vo.getAmount());
         mandatories.put("Detail Transaksi", (T) vo.getDetailTransaksi());
+        mandatories.put("Tanggal Transaksi", (T) vo.getTanggalTransaksi());
+
         String mandatoryCheck = mandatoryValidator.validateMandatoryFields(mandatories);
         if(mandatoryCheck!=null){
             return mandatoryCheck;
