@@ -10,6 +10,11 @@ private String name;
 private Integer amount;
 @JsonProperty("detail_transaksi")
 private String detailTransaksi;
+
+@JsonProperty("tanggal_transaksi")
+private String tanggalTransaksi;
+
+
 public TransaksiReqVO(){};
 public TransaksiReqVO(String name, Integer amount){
     this.name = name;

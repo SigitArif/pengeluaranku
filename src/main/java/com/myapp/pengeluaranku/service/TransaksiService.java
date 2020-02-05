@@ -1,5 +1,6 @@
 package com.myapp.pengeluaranku.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -13,6 +14,7 @@ import com.myapp.pengeluaranku.mapper.TransaksiMapper;
 import com.myapp.pengeluaranku.repository.PengeluaranRepository;
 import com.myapp.pengeluaranku.repository.TransaksiRepository;
 import com.myapp.pengeluaranku.repository.UserRepository;
+import com.myapp.pengeluaranku.util.ConverterUtil;
 import com.myapp.pengeluaranku.util.ValidationUtil;
 import com.myapp.pengeluaranku.validator.TransaksiValidator;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
@@ -44,12 +46,16 @@ TransaksiMapper transaksiMapper;
         String message = transaksiValidator.validateTransaksi(vo);
          if(message!=null) throw new PengeluarankuException(message, HttpStatus.BAD_REQUEST, StatusCode.ERROR);
         Transaksi model = new Transaksi();
+        
+        Date trxDate = ConverterUtil.convertStringTimeStampToDate(vo.getTanggalTransaksi());
         Pengeluaran pengeluaran = pengeluaranRepository.findByName(vo.getName());
         User user = userRepository.findByUuid("63800da4-0d02-4746-98c3-b6b902d3c509");
+        
         model.setAmount(vo.getAmount());
         model.setPengeluaran(pengeluaran);
         model.setUser(user);
         model.setDetailTransaksi(vo.getDetailTransaksi());
+        model.setTrxDate(trxDate);
         transaksiRepository.save(model);
          return "Data saved";
 

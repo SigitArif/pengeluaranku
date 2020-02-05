@@ -13,6 +13,8 @@ public class TransaksiReqVO2{
     private Integer amount;
     @JsonProperty("detail_transaksi")
     private String detailTransaksi;
+    @JsonProperty("tanggal_transaksi")
+    private String tanggalTransaksi;
     public TransaksiReqVO2(){};
     public TransaksiReqVO2(String userId, Integer amount){
         this.userId = userId;

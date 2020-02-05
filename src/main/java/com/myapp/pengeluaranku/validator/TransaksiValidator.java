@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.myapp.pengeluaranku.domain.Pengeluaran;
+import com.myapp.pengeluaranku.enums.StatusCode;
+import com.myapp.pengeluaranku.exception.PengeluarankuException;
 import com.myapp.pengeluaranku.repository.PengeluaranRepository;
 import com.myapp.pengeluaranku.util.ValidationUtil;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO2;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,6 +37,16 @@ PengeluaranRepository pengeluaranRepository;
         if(model==null){
             return "Pengeluaran not found";
         }
+        try{
+            Long timestamp = Long.parseLong(vo.getTanggalTransaksi());
+            
+        }
+        catch(Exception e){
+            throw new PengeluarankuException("Invalid format tanggal transaksi", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
+
+        }
+
+        
         
 
         return null;
