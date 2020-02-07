@@ -33,6 +33,9 @@ public class TransaksiMapperImpl implements TransaksiMapper {
         if ( model.getDetailTransaksi() != null ) {
             transaksiResVO.setDetailTransaksi( model.getDetailTransaksi() );
         }
+        if ( model.getPengeluaran().getName() != null ) {
+            transaksiResVO.setName( model.getPengeluaran().getName());
+        }
 
         return transaksiResVO;
     }
