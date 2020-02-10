@@ -64,6 +64,7 @@ TransaksiMapper transaksiMapper;
 	public List<TransaksiResVO> list() {
         List<Transaksi> transaksi = transaksiRepository.findAll();
         List<TransaksiResVO> result = transaksiMapper.toVO(transaksi);
+        
 		return result;
 	}
 
@@ -95,5 +96,10 @@ TransaksiMapper transaksiMapper;
             transaksiRepository.delete(transaksi);
         }
         return "Transaksi terhapus";
+    }
+
+    public Integer countTrxAmount(String timestamp, String type){
+        
+        return null;
     }
 }

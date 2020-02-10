@@ -11,6 +11,8 @@ public class TransaksiResVO{
     private Integer amount;
     @JsonProperty("detail_transaksi")
     private String detailTransaksi;
+    @JsonProperty("tanggal_transaksi")
+    private String tanggalTransaksi;
     public TransaksiResVO(){};
     public TransaksiResVO(String name, Integer amount, String uuid){
         this.name = name;

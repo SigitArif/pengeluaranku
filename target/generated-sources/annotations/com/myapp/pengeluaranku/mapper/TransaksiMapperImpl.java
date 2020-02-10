@@ -3,6 +3,8 @@ package com.myapp.pengeluaranku.mapper;
 import com.myapp.pengeluaranku.domain.Transaksi;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
 import com.myapp.pengeluaranku.vo.TransaksiResVO;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -35,6 +37,11 @@ public class TransaksiMapperImpl implements TransaksiMapper {
         }
         if ( model.getPengeluaran().getName() != null ) {
             transaksiResVO.setName( model.getPengeluaran().getName());
+        }
+        if(model.getTrxDate()!=null){
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String trxdate = dateFormat.format(model.getTrxDate());
+            transaksiResVO.setTanggalTransaksi(trxdate);
         }
 
         return transaksiResVO;
