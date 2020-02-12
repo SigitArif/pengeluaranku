@@ -14,7 +14,7 @@ import org.springframework.data.repository.query.Param;
 public interface TransaksiRepository extends JpaRepository<Transaksi,Integer>, JpaSpecificationExecutor<Transaksi>{
    Transaksi findByUuid(String uuid); 
 
-   @Query(value="SELECT * FROM transaksi WHERE date(transaction_date) = date(?1)", nativeQuery = true)
-   List<Transaksi> selectTrans(@Param("date")String date);
+   @Query(value="SELECT * FROM transaksi WHERE transaction_date like :date%", nativeQuery = true)
+   List<Transaksi> selectMonthlyTrans(@Param("date")String date);
 
 }

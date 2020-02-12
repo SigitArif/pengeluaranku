@@ -2,6 +2,7 @@ package com.myapp.pengeluaranku.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -98,8 +99,15 @@ TransaksiMapper transaksiMapper;
         return "Transaksi terhapus";
     }
 
-    public Integer countTrxAmount(String timestamp, String type){
-        
-        return null;
+    public Integer countTrxAmount(String monthAndYear, String type){
+        List<Transaksi> transactions = transaksiRepository.selectMonthlyTrans(monthAndYear);
+        int totalAmount = 0;
+        List<Transaksi> trans = transactions.stream()
+                    .filter((trx)->trx.getPengeluaran().getType().equals(type))
+                    .collect(Collectors.toList());
+        for(Transaksi trs : trans){
+            totalAmount = totalAmount + trs.getAmount();
+        }
+        return totalAmount;
     }
 }

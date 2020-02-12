@@ -27,13 +27,13 @@ public class TransaksiRepositoryTest {
         Integer month= 2;
         Integer year = 2020;
         String type = "K";
-        String date = "2020-02-08";
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-        Date newDate = dateFormat.parse(date);
+        String date = "2020-02";
+        // String pattern = "yyyy-MM-dd";
+        // SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        // Date newDate = dateFormat.parse(date);
         
 
-        List<Transaksi> pengeluaran = transaksiRepository.selectTrans(date);
+        List<Transaksi> pengeluaran = transaksiRepository.selectMonthlyTrans(date);
         assertNotNull(pengeluaran);
     }
 }
