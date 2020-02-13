@@ -16,7 +16,7 @@ public class TransaksiServiceTest{
     TransaksiService transaksiService;
     @Test
     public void countTrx(){
-    String monthAndYear = "2020-01";
+    String monthAndYear = "2020-01-02";
     String type ="K";
     int totalAmount = transaksiService.countTrxAmount(monthAndYear, type);
     assertNotNull(totalAmount);

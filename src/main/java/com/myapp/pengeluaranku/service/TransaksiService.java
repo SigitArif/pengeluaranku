@@ -99,7 +99,8 @@ TransaksiMapper transaksiMapper;
         return "Transaksi terhapus";
     }
 
-    public Integer countTrxAmount(String monthAndYear, String type){
+    public Integer countTrxAmount(String date, String type){
+        String monthAndYear = date.substring(0, 7);
         List<Transaksi> transactions = transaksiRepository.selectMonthlyTrans(monthAndYear);
         int totalAmount = 0;
         List<Transaksi> trans = transactions.stream()
