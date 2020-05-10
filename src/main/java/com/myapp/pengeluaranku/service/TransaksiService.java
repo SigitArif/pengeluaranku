@@ -63,7 +63,7 @@ TransaksiMapper transaksiMapper;
     }
 
 	public List<TransaksiResVO> list() {
-        List<Transaksi> transaksi = transaksiRepository.findAll();
+        List<Transaksi> transaksi = transaksiRepository.findByIsDeleteIsNullOrderByTrxDate();
         List<TransaksiResVO> result = transaksiMapper.toVO(transaksi);
         
 		return result;

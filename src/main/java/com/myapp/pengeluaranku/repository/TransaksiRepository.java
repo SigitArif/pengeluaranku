@@ -17,4 +17,8 @@ public interface TransaksiRepository extends JpaRepository<Transaksi,Integer>, J
    @Query(value="SELECT * FROM transaksi WHERE transaction_date like :date%", nativeQuery = true)
    List<Transaksi> selectMonthlyTrans(@Param("date")String date);
 
+   List<Transaksi> findByIsDeleteIsNullOrderByTrxDate();
+
+   
+
 }

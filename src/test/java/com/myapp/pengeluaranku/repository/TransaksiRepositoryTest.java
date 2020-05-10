@@ -36,4 +36,10 @@ public class TransaksiRepositoryTest {
         List<Transaksi> pengeluaran = transaksiRepository.selectMonthlyTrans(date);
         assertNotNull(pengeluaran);
     }
+
+    @Test
+    public void sortTest(){
+        List<Transaksi> transactions = transaksiRepository.findByIsDeleteIsNullOrderByTrxDate();
+        assertNotNull(transactions);
+    }
 }
