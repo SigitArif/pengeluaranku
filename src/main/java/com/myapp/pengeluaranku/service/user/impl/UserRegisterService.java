@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 
 import com.google.common.hash.Hashing;
+import com.myapp.pengeluaranku.config.KeycloakAdminClient;
 import com.myapp.pengeluaranku.domain.User;
 import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.exception.PengeluarankuException;
@@ -22,6 +23,7 @@ import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -41,25 +43,20 @@ public class UserRegisterService implements UserService {
     @Value("${keycloak.realm}")
     private String realm;
 
+    @Autowired
+    private KeycloakAdminClient keycloakAdminClient;
+
     @Override
     public UserResVO register(RegisterReqVO vo){
-        KeycloakAccount keycloakAccount;
-        Keycloak keycloakAdmin;
-
-    
-        try{
-            keycloakAdmin = Keycloak.getInstance(keycloakServer, Constants.Keycloak.REALM_MASTER, usernameAdmin
-            , passwordAdmin, Constants.Keycloak.ADMIN_CLI_CLIENT_ID);
-        }
-        catch (Exception e){
-            throw new PengeluarankuException("Error connecting keycloak server", HttpStatus.SERVICE_UNAVAILABLE, StatusCode.ERROR);
-        }
-        createUserKeycloak(keycloakAdmin, vo.getUser(), vo.getPassword());
+        
+        createUserKeycloak(vo.getUser(), vo.getPassword());
 
         return null;
     }
 
-    public String createUserKeycloak(Keycloak keycloak, UserReqVO userVO, String password){
+    public String createUserKeycloak(UserReqVO userVO, String password){
+        // set Keycloak
+        Keycloak keycloak = keycloakAdminClient.getInstance();
         // set user identifiaction
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setUsername(userVO.getEmail());
