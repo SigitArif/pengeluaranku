@@ -15,3 +15,18 @@ spring:
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.MySQL5Dialect
+
+keycloak:
+    realm : pengeluaranku
+    auth-server-url : http://localhost:8080/auth
+    ssl-required : external
+    resource : api-pengeluaranku
+    credentials:
+        secret : 33748e4c-4fc2-4d07-b33b-b49f5ad650a2
+    use-resource-role-mappings : true
+    bearer-only: true
+
+admin:
+    keycloak:
+        username: admin
+        password: Demoneyesky0&1

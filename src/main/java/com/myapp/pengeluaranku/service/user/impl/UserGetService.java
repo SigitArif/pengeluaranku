@@ -1,13 +1,12 @@
-package com.myapp.pengeluaranku.service.impl;
+package com.myapp.pengeluaranku.service.user.impl;
 
 import java.util.List;
 
 import com.myapp.pengeluaranku.domain.User;
 import com.myapp.pengeluaranku.mapper.UserMapper;
 import com.myapp.pengeluaranku.repository.UserRepository;
-import com.myapp.pengeluaranku.service.UserService;
+import com.myapp.pengeluaranku.service.user.UserService;
 import com.myapp.pengeluaranku.validator.UserValidator;
-import com.myapp.pengeluaranku.vo.UserReqVO;
 import com.myapp.pengeluaranku.vo.UserResVO;
 
 import org.springframework.beans.factory.annotation.Autowired;

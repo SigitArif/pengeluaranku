@@ -2,6 +2,7 @@ package com.myapp.pengeluaranku.controller;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.xml.ws.Response;
 
 import com.myapp.pengeluaranku.service.PengeluaranService;
@@ -74,6 +75,8 @@ public class PengeluaranController{
         return RestUtil.getJsonResponse(result);
         
     }
+
+    @RolesAllowed("customers")
     @GetMapping(value="/get-all")
     public ResponseEntity<ResultVO> getAll(){
         ResultVO result = new ResultVO();

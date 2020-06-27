@@ -3,8 +3,6 @@ package com.myapp.pengeluaranku.mapper;
 import com.myapp.pengeluaranku.domain.Transaksi;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
 import com.myapp.pengeluaranku.vo.TransaksiResVO;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -12,40 +10,11 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-02-05T09:23:31+0700",
+    date = "2020-06-14T10:48:37+0700",
     comments = "version: 1.3.0.Beta2, compiler: javac, environment: Java 1.8.0_201 (Oracle Corporation)"
 )
 @Component
 public class TransaksiMapperImpl implements TransaksiMapper {
-
-    @Override
-    public TransaksiResVO toVO(Transaksi model) {
-        if ( model == null ) {
-            return null;
-        }
-
-        TransaksiResVO transaksiResVO = new TransaksiResVO();
-
-        if ( model.getUuid() != null ) {
-            transaksiResVO.setUuid( model.getUuid() );
-        }
-        if ( model.getAmount() != null ) {
-            transaksiResVO.setAmount( model.getAmount() );
-        }
-        if ( model.getDetailTransaksi() != null ) {
-            transaksiResVO.setDetailTransaksi( model.getDetailTransaksi() );
-        }
-        if ( model.getPengeluaran().getName() != null ) {
-            transaksiResVO.setName( model.getPengeluaran().getName());
-        }
-        if(model.getTrxDate()!=null){
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String trxdate = dateFormat.format(model.getTrxDate());
-            transaksiResVO.setTanggalTransaksi(trxdate);
-        }
-
-        return transaksiResVO;
-    }
 
     @Override
     public Transaksi toModel(TransaksiReqVO vo) {
@@ -91,5 +60,30 @@ public class TransaksiMapperImpl implements TransaksiMapper {
         }
 
         return list;
+    }
+
+    @Override
+    public TransaksiResVO toVO(Transaksi model) {
+        if ( model == null ) {
+            return null;
+        }
+
+        TransaksiResVO transaksiResVO = new TransaksiResVO();
+
+        if ( model.getUuid() != null ) {
+            transaksiResVO.setUuid( model.getUuid() );
+        }
+        if ( model.getAmount() != null ) {
+            transaksiResVO.setAmount( model.getAmount() );
+        }
+        if ( model.getDetailTransaksi() != null ) {
+            transaksiResVO.setDetailTransaksi( model.getDetailTransaksi() );
+        }
+
+        transaksiResVO.setName( model.getPengeluaran().getName() );
+
+        setTrxDate( transaksiResVO, model );
+
+        return transaksiResVO;
     }
 }

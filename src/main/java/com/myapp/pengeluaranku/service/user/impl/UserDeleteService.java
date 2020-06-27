@@ -1,10 +1,10 @@
-package com.myapp.pengeluaranku.service.impl;
+package com.myapp.pengeluaranku.service.user.impl;
 
 import java.util.Date;
 
 import com.myapp.pengeluaranku.domain.User;
 import com.myapp.pengeluaranku.repository.UserRepository;
-import com.myapp.pengeluaranku.service.UserService;
+import com.myapp.pengeluaranku.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

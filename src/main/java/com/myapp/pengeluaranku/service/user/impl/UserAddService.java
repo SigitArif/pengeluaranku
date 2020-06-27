@@ -1,11 +1,11 @@
-package com.myapp.pengeluaranku.service.impl;
+package com.myapp.pengeluaranku.service.user.impl;
 
 import com.myapp.pengeluaranku.domain.User;
 import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.exception.PengeluarankuException;
 import com.myapp.pengeluaranku.mapper.UserMapper;
 import com.myapp.pengeluaranku.repository.UserRepository;
-import com.myapp.pengeluaranku.service.UserService;
+import com.myapp.pengeluaranku.service.user.UserService;
 import com.myapp.pengeluaranku.validator.UserValidator;
 import com.myapp.pengeluaranku.vo.UserReqVO;
 
