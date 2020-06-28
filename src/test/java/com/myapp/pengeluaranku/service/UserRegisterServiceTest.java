@@ -20,6 +20,10 @@ public class UserRegisterServiceTest {
  @Test
  public void registerKeycloakThenSuccess(){
     UserReqVO userVO = new UserReqVO();
+    userVO.setAddress("jakarta");
+    userVO.setEmail("sigit.arifanggoro@ai.astra.co.id");
+    userVO.setName("Sigit Arif Anggoro");
+    userVO.setPhone("083869448712");
     String password = "aspjvjap0j2";
 
     String result = userRegisterService.createUserKeycloak(userVO, password);
