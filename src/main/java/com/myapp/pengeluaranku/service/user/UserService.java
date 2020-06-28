@@ -2,6 +2,8 @@ package com.myapp.pengeluaranku.service.user;
 
 import java.util.List;
 
+import com.myapp.pengeluaranku.vo.AuthResponseVO;
+import com.myapp.pengeluaranku.vo.LoginVO;
 import com.myapp.pengeluaranku.vo.RegisterReqVO;
 import com.myapp.pengeluaranku.vo.UserReqVO;
 import com.myapp.pengeluaranku.vo.UserResVO;
@@ -30,6 +32,12 @@ public interface UserService{
     default UserResVO register(RegisterReqVO vo){
         return null;
     }
+
+    default AuthResponseVO login(LoginVO vo){
+        return null;
+    }
+
+    
 
     
    
