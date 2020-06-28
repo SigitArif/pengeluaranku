@@ -31,15 +31,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserRegisterService implements UserService {
 
-    @Value("${keycloak.auth-server-url}")
-    private String keycloakServer;
-    
-    @Value("${admin.keycloak.username}")
-    private String usernameAdmin;
-    
-    @Value("${admin.keycloak.password}")
-    private String passwordAdmin;
-
     @Value("${keycloak.realm}")
     private String realm;
 
