@@ -2,6 +2,7 @@ package com.myapp.pengeluaranku.service.user;
 
 import static org.junit.Assert.assertNotNull;
 
+import com.myapp.pengeluaranku.service.user.impl.UserLoginService;
 import com.myapp.pengeluaranku.vo.AuthResponseVO;
 import com.myapp.pengeluaranku.vo.LoginVO;
 
@@ -16,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class UserServiceTest {
 
 @Autowired
-UserService userService;
+UserLoginService userService;
 
 @Test
 public void loginThenSuccess(){

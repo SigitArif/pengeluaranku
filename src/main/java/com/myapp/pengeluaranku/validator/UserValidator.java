@@ -2,6 +2,7 @@ package com.myapp.pengeluaranku.validator;
 
 import com.myapp.pengeluaranku.domain.User;
 import com.myapp.pengeluaranku.repository.UserRepository;
+import com.myapp.pengeluaranku.vo.LoginVO;
 import com.myapp.pengeluaranku.vo.UserReqVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +13,21 @@ public class UserValidator{
 @Autowired
 UserRepository userRepository;
 
-public String validateUserVO(UserReqVO vo){
+    public String validateUserVO(UserReqVO vo){
     // jika find by email exist
     
-    User model = userRepository.findByEmail(vo.getEmail());
-    if(model!=null){
-        return "Email already exist";
+        User model = userRepository.findByEmail(vo.getEmail());
+        if(model!=null){
+            return "Email already exist";
+        }
+        return null;
     }
 
+    public void validateLogin(LoginVO vo){
 
+    }
+
+    public String validateLoginMessage(LoginVO vo){
         return null;
-
-}
+    }
 }
