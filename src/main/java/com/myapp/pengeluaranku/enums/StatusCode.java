@@ -6,5 +6,6 @@ public enum StatusCode {
     FORBIDDEN,
     ERROR,
     FAILED,
-    DATA_NOT_FOUND;
+    DATA_NOT_FOUND,
+    LOGIN_ERROR;
 }

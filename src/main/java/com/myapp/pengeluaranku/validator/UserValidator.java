@@ -1,11 +1,15 @@
 package com.myapp.pengeluaranku.validator;
 
 import com.myapp.pengeluaranku.domain.User;
+import com.myapp.pengeluaranku.enums.StatusCode;
+import com.myapp.pengeluaranku.exception.PengeluarankuException;
 import com.myapp.pengeluaranku.repository.UserRepository;
+import com.myapp.pengeluaranku.util.ValidationUtil;
 import com.myapp.pengeluaranku.vo.LoginVO;
 import com.myapp.pengeluaranku.vo.UserReqVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,10 +28,16 @@ UserRepository userRepository;
     }
 
     public void validateLogin(LoginVO vo){
+        String message = validateLoginMessage(vo);
+        if(message!=null) throw new PengeluarankuException(message, HttpStatus.BAD_REQUEST, StatusCode.ERROR);
 
     }
 
     public String validateLoginMessage(LoginVO vo){
+        if(ValidationUtil.isEmptyOrNull(vo.getId())) return "Id can't be empty";
+        if(ValidationUtil.isEmptyOrNull(vo.getPassword())) return "Password can't be empty";
+        if(ValidationUtil.isEmptyOrNull(vo.getStatusLogin())) return "Status login can't be empty";        
+
         return null;
     }
 }

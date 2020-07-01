@@ -5,6 +5,9 @@ import com.myapp.pengeluaranku.exception.PengeluarankuException;
 import com.myapp.pengeluaranku.util.Constants;
 
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.representations.AccessTokenResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -13,6 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 public class KeycloakAdminClient {
+
+    private static final Logger log = LoggerFactory.getLogger(KeycloakAdminClient.class);
+    
     @Value("${keycloak.auth-server-url}")
     private String keycloakServer;
 
@@ -24,6 +30,12 @@ public class KeycloakAdminClient {
 
     @Value("${keycloak.realm}")
     private String realm;
+
+    @Value("${keycloak.resource}")
+    String clientId;
+
+    @Value("${keycloak.credentials.secret}")
+    String clientSecret;
     
     private Keycloak keycloak;
     
@@ -34,7 +46,6 @@ public class KeycloakAdminClient {
         }
         else{
             Keycloak keycloakAdmin;
-
     
         try{
             keycloakAdmin = Keycloak.getInstance(keycloakServer, 
@@ -50,6 +61,31 @@ public class KeycloakAdminClient {
         }
         }
         return keycloak;
+    }
+
+    public Keycloak doLogin(String username, String password){
+        Keycloak keycloak = null;
+        try{ 
+            keycloak = Keycloak.getInstance(keycloakServer, realm, username, password, clientId, clientSecret);
+        }
+        catch(Exception e){
+            log.error("ERROR: ", e);
+            throw new PengeluarankuException("Login Error Check Username Password", HttpStatus.BAD_REQUEST, StatusCode.LOGIN_ERROR);
+        }
+            return keycloak;
+    }
+
+    public AccessTokenResponse getToken(Keycloak keycloak){
+        AccessTokenResponse accessTokenResponse = null;
+        try{
+            accessTokenResponse = keycloak.tokenManager().getAccessToken();
+            log.info("token :"+accessTokenResponse);
+        }
+        catch(Exception e){
+            log.error("ERROR", e);
+            throw new PengeluarankuException("Get Token Error", HttpStatus.BAD_REQUEST, StatusCode.LOGIN_ERROR);
+        }
+        return accessTokenResponse;
     }
     
 }
