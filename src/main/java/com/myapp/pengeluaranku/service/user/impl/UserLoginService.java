@@ -10,6 +10,7 @@ import com.myapp.pengeluaranku.validator.UserValidator;
 import com.myapp.pengeluaranku.vo.*;
 
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.representations.AccessTokenResponse;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,10 +49,16 @@ public class UserLoginService implements UserService {
 
         //3. get token
 
+        AccessTokenResponse accessTokenResponse = keycloakAdmin.getToken(keycloak);
+        //4. set token
+        AuthResponseVO authResponseVO = AuthResponseVO.builder().build();
+
+        authResponseVO.setToken(accessTokenResponse.getToken());
+        authResponseVO.setRefreshToken(accessTokenResponse.getRefreshToken());
+        // close keycloak
+        keycloak.close();
         
-
-
-        return null;
+        return authResponseVO;
     }
 
 
