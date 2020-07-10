@@ -39,10 +39,10 @@ public class UserLoginService implements UserService {
 
         Keycloak keycloak = null;
 
-        if(statusLogin.equals(StatusLogin.EMAIL)){
+        if(statusLogin.equals(StatusLogin.EMAIL.toString())){
             //1. check user exist
-            User user = userRepository.findByEmail(username);
-            if(user==null) throw new PengeluarankuException("User Not Found", HttpStatus.NOT_FOUND, StatusCode.DATA_NOT_FOUND);
+            // User user = userRepository.findByEmail(username);
+            // if(user==null) throw new PengeluarankuException("User Not Found", HttpStatus.NOT_FOUND, StatusCode.DATA_NOT_FOUND);
             //2. login keycloak
             keycloak = keycloakAdmin.doLogin(username, password);
         }
@@ -51,7 +51,7 @@ public class UserLoginService implements UserService {
 
         AccessTokenResponse accessTokenResponse = keycloakAdmin.getToken(keycloak);
         //4. set token
-        AuthResponseVO authResponseVO = AuthResponseVO.builder().build();
+        AuthResponseVO authResponseVO = new AuthResponseVO();
 
         authResponseVO.setToken(accessTokenResponse.getToken());
         authResponseVO.setRefreshToken(accessTokenResponse.getRefreshToken());

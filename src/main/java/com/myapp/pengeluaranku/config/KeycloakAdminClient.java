@@ -1,5 +1,7 @@
 package com.myapp.pengeluaranku.config;
 
+import javax.ws.rs.NotAuthorizedException;
+
 import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.exception.PengeluarankuException;
 import com.myapp.pengeluaranku.util.Constants;
@@ -80,6 +82,11 @@ public class KeycloakAdminClient {
         try{
             accessTokenResponse = keycloak.tokenManager().getAccessToken();
             log.info("token :"+accessTokenResponse);
+        }
+        catch(NotAuthorizedException e){
+            log.error("ERROR",e);
+            throw new PengeluarankuException("Check Username Password", HttpStatus.BAD_REQUEST, StatusCode.LOGIN_ERROR);
+
         }
         catch(Exception e){
             log.error("ERROR", e);

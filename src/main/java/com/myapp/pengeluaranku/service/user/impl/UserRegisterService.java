@@ -42,6 +42,7 @@ public class UserRegisterService implements UserService {
         
         createUserKeycloak(vo.getUser(), vo.getPassword());
 
+
         return null;
     }
 
@@ -100,7 +101,7 @@ public class UserRegisterService implements UserService {
         return keycloak.realm(realm).roles().get(role).toRepresentation();
     }
 
-    private String hashPassword(String password){
+    public String hashPassword(String password){
         String signature = Hashing.sha256()
          .hashString(password, StandardCharsets.UTF_8)
          .toString();
