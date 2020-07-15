@@ -25,6 +25,8 @@ public class UserLoginService implements UserService {
     UserRepository userRepository;
     @Autowired
     KeycloakAdminClient keycloakAdmin;
+    @Autowired
+    UserRegisterService userRegisterService;
     @Override
     public AuthResponseVO login(LoginVO vo){
         // validate login request
@@ -34,7 +36,7 @@ public class UserLoginService implements UserService {
         log.info("STATUS_LOGIN: ", statusLogin);
         String username = vo.getId();
         log.info("USERNAME: ", username);
-        String password = vo.getPassword();
+        String password = userRegisterService.hashPassword(vo.getPassword());
         log.info("PASSWORD: ", password);
 
         Keycloak keycloak = null;

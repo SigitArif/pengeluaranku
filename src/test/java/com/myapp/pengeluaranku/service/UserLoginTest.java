@@ -19,15 +19,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class UserLoginTest {
 @Autowired
 UserLoginService userLoginService;
-@Autowired
-UserRegisterService userRegisterService;
+
 //1. Test success login
 @Test
 public void loginThenOK(){
 
     LoginVO vo = LoginVO.builder()
                 .id("sigit.arifanggoro@ai.astra.co.id")
-                .password(userRegisterService.hashPassword("aspjvjap0j2"))
+                .password("aspjvjap0j2")
                 .statusLogin("EMAIL")
                 .build();
     AuthResponseVO result = userLoginService.login(vo);

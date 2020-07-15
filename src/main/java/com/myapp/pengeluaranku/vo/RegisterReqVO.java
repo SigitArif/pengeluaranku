@@ -1,5 +1,6 @@
 package com.myapp.pengeluaranku.vo;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data

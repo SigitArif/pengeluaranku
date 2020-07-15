@@ -14,6 +14,7 @@ import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.exception.PengeluarankuException;
 import com.myapp.pengeluaranku.service.user.UserService;
 import com.myapp.pengeluaranku.util.Constants;
+import com.myapp.pengeluaranku.validator.UserValidator;
 import com.myapp.pengeluaranku.vo.RegisterReqVO;
 import com.myapp.pengeluaranku.vo.UserReqVO;
 import com.myapp.pengeluaranku.vo.UserResVO;
@@ -37,10 +38,19 @@ public class UserRegisterService implements UserService {
     @Autowired
     private KeycloakAdminClient keycloakAdminClient;
 
+    @Autowired
+    private UserValidator userValidator;
+
     @Override
     public UserResVO register(RegisterReqVO vo){
+        // validate req vo
+        userValidator.validateRegister(vo);
         
         createUserKeycloak(vo.getUser(), vo.getPassword());
+        // save to DB
+
+        // give Response
+
 
 
         return null;

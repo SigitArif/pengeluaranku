@@ -6,6 +6,7 @@ import com.myapp.pengeluaranku.exception.PengeluarankuException;
 import com.myapp.pengeluaranku.repository.UserRepository;
 import com.myapp.pengeluaranku.util.ValidationUtil;
 import com.myapp.pengeluaranku.vo.LoginVO;
+import com.myapp.pengeluaranku.vo.RegisterReqVO;
 import com.myapp.pengeluaranku.vo.UserReqVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +41,19 @@ UserRepository userRepository;
 
         return null;
     }
+    public void validateRegister(RegisterReqVO vo){
+        String message = validateRegisterMessage(vo);
+        if(message!=null) throw new PengeluarankuException(message, HttpStatus.BAD_REQUEST, StatusCode.ERROR);
+
+    }
+
+    public String validateRegisterMessage(RegisterReqVO vo){
+        if(ValidationUtil.isEmptyOrNull(vo.getPassword())) return "Password can't be empty";
+        UserReqVO user = vo.getUser();
+        if(ValidationUtil.isEmptyOrNull(user.getName())) return "Name can't be empty";
+        if(ValidationUtil.isEmptyOrNull(user.getPhone())) return "Phone can't be empty";
+        
+        return null;
+    }
+
 }
