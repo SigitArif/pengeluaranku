@@ -13,7 +13,8 @@ Terbuka untuk saran dan masukan juga
 - Install ekstensi lombok pada IDE anda
 - Install maven
 - Buat database dan user baru sesuai application.yaml
-
+- install keycloak 10.0.2
+- Buat akun admin keycloak, sesuaikan credentialnya di application.yaml
 
 
 ```sh
