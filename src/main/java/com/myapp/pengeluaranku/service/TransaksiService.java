@@ -76,12 +76,15 @@ TransaksiMapper transaksiMapper;
         if(pengeluaran==null) throw new PengeluarankuException("User Not Found", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
         User user = userRepository.findByUuid(vo.getUserId());
         if(user==null) throw new PengeluarankuException("Pengeluaran Not Found", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
+        Date trxDate = ConverterUtil.convertStringTimeStampToDate(vo.getTanggalTransaksi());
+
         Transaksi transaksi = new Transaksi();
         transaksi.setAmount(vo.getAmount());
         transaksi.setCreatedBy(user.getName());
         transaksi.setDetailTransaksi(vo.getDetailTransaksi());
         transaksi.setUser(user);
         transaksi.setPengeluaran(pengeluaran);
+        transaksi.setTrxDate(trxDate);
         transaksiRepository.save(transaksi);
         return "Data saved";
     } 
