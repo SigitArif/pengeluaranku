@@ -4,19 +4,13 @@ import javax.validation.Valid;
 
 import com.myapp.pengeluaranku.service.user.impl.*;
 import com.myapp.pengeluaranku.util.RestUtil;
-import com.myapp.pengeluaranku.vo.ResultVO;
-import com.myapp.pengeluaranku.vo.UserReqVO;
+import com.myapp.pengeluaranku.vo.*;
 
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value ="pengeluaranku-service/api/v1/user")
 public class UserController{
@@ -24,11 +18,18 @@ public class UserController{
 UserAddService userAddService;
 UserEditService userEditService;
 UserDeleteService userDeleteService;
+UserRegisterService userRegisterService;
+UserLoginService userLoginService;
+
 @Autowired
-public UserController(UserAddService userAddService, UserEditService userEditService, UserDeleteService userDeleteService){
+public UserController(UserAddService userAddService, UserEditService userEditService, 
+                    UserDeleteService userDeleteService, UserRegisterService userRegisterService,
+                    UserLoginService userLoginService){
    this.userAddService = userAddService;
    this.userEditService = userEditService;
    this.userDeleteService = userDeleteService;
+   this.userRegisterService = userRegisterService;
+   this.userLoginService = userLoginService;
 }
 
     @PostMapping(value="add")
@@ -66,6 +67,28 @@ public UserController(UserAddService userAddService, UserEditService userEditSer
         result.setResults(results);
         return RestUtil.getJsonResponse(result);
 
+    }
+
+    @PostMapping(value="register")
+    @ResponseBody
+    public ResponseEntity<ResultVO> register(@RequestBody RegisterReqVO vo){
+        ResultVO result = new ResultVO();
+        UserResVO results = userRegisterService.register(vo);
+        result.setMessage("User Registered");
+        result.setStatus(HttpStatus.SC_CREATED);
+        result.setResults(results);        
+        return RestUtil.getJsonResponse(result);
+    }
+
+    @PostMapping(value="login")
+    @ResponseBody
+    public ResponseEntity<ResultVO> login(@RequestBody LoginVO vo) {
+        ResultVO result = new ResultVO();
+        AuthResponseVO results = userLoginService.login(vo);
+        result.setMessage("Login Success");
+        result.setStatus(HttpStatus.SC_OK);
+        result.setResults(results);
+        return RestUtil.getJsonResponse(result);
     }
 
 }
