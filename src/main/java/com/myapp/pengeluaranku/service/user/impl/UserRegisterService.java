@@ -12,6 +12,7 @@ import com.myapp.pengeluaranku.config.KeycloakAdminClient;
 import com.myapp.pengeluaranku.domain.User;
 import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.exception.PengeluarankuException;
+import com.myapp.pengeluaranku.repository.UserRepository;
 import com.myapp.pengeluaranku.service.user.UserService;
 import com.myapp.pengeluaranku.util.Constants;
 import com.myapp.pengeluaranku.validator.UserValidator;
@@ -41,19 +42,41 @@ public class UserRegisterService implements UserService {
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    private UserRepository userRepository;
+    
     @Override
     public UserResVO register(RegisterReqVO vo){
         // validate req vo
         userValidator.validateRegister(vo);
         
         createUserKeycloak(vo.getUser(), vo.getPassword());
+
+        // user data
+        UserReqVO userReqVO = vo.getUser();
+        String address = userReqVO.getAddress();
+        String email = userReqVO.getEmail();
+        String name = userReqVO.getName();
+        String phone = userReqVO.getPhone();
+        
         // save to DB
+        User user = new User();
+        user.setAddress(address);
+        user.setCreatedBy(email);
+        user.setEmail(email);
+        user.setName(name);
+        user.setPhone(phone);
 
+        User userSaved = userRepository.save(user);    
         // give Response
-
-
-
-        return null;
+        UserResVO userResVO = new UserResVO();
+        userResVO.setUuid(userSaved.getUuid());
+        userResVO.setAddress(address);
+        userResVO.setEmail(email);
+        userResVO.setName(name);
+        userResVO.setPhone(phone);
+        
+        return userResVO;
     }
 
     public String createUserKeycloak(UserReqVO userVO, String password){
