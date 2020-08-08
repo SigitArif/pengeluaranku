@@ -9,7 +9,7 @@ Terbuka untuk saran dan masukan juga
 
 ### Installation
 
-- Install java 1.8
+- Install java 1.8 atau lebih
 - Install ekstensi lombok pada IDE anda
 - Install maven
 - Buat database dan user baru sesuai application.yaml
