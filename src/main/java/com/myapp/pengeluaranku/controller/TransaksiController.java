@@ -2,10 +2,11 @@ package com.myapp.pengeluaranku.controller;
 
 import java.util.List;
 
-
+import com.myapp.pengeluaranku.action.RequestAuth;
 import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.service.PengeluaranService;
 import com.myapp.pengeluaranku.service.TransaksiService;
+import com.myapp.pengeluaranku.util.JwtDecoder;
 import com.myapp.pengeluaranku.util.RestUtil;
 import com.myapp.pengeluaranku.vo.PengeluaranRequestVO;
 import com.myapp.pengeluaranku.vo.ResultVO;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +32,10 @@ public class TransaksiController{
 
     @Autowired
     TransaksiService transaksiService;
+
+    @Autowired
+    JwtDecoder jwtDecoder;
+
     @PostMapping(value="/add")
     @ResponseBody
     public ResponseEntity<ResultVO> add(@RequestBody TransaksiReqVO vo){
@@ -45,7 +51,9 @@ public class TransaksiController{
 
     @PostMapping(value="/add-transaksi")
     @ResponseBody
-    public ResponseEntity<ResultVO> addTransaksi(@RequestBody TransaksiReqVO2 vo){
+    @RequestAuth
+    public ResponseEntity<ResultVO> addTransaksi(@RequestBody TransaksiReqVO2 vo, 
+            @RequestHeader(value = "Authorization", required = false) String auth){
         ResultVO result = new ResultVO();
         String results = transaksiService.addTransaksi(vo);
         result.setMessage(StatusCode.OK.toString());
@@ -55,8 +63,8 @@ public class TransaksiController{
         return RestUtil.getJsonResponse(result);
         
     }
-    
 
+    
     @GetMapping(value="/list")
     @ResponseBody
     public ResponseEntity<ResultVO> list(){
