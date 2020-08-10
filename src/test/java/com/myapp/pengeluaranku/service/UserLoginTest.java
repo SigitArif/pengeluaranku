@@ -21,17 +21,17 @@ public class UserLoginTest {
 UserLoginService userLoginService;
 
 //1. Test success login
-@Test
-public void loginThenOK(){
+// @Test
+// public void loginThenOK(){
 
-    LoginVO vo = LoginVO.builder()
-                .id("sigit.arifanggoro@ai.astra.co.id")
-                .password("aspjvjap0j2")
-                .statusLogin("EMAIL")
-                .build();
-    AuthResponseVO result = userLoginService.login(vo);
-    assertNotNull(result);
+//     LoginVO vo = LoginVO.builder()
+//                 .id("sigit.arifanggoro@ai.astra.co.id")
+//                 .password("aspjvjap0j2")
+//                 .statusLogin("EMAIL")
+//                 .build();
+//     AuthResponseVO result = userLoginService.login(vo);
+//     assertNotNull(result);
 
-    }
+//     }
     
 }

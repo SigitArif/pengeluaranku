@@ -6,8 +6,6 @@ import lombok.Data;
 
 @Data
 public class TransaksiReqVO2{
-    @JsonProperty("user_id")
-    private String userId;
     @JsonProperty("pengeluaran_id")
     private String pengeluaranId;
     private Integer amount;
@@ -16,8 +14,5 @@ public class TransaksiReqVO2{
     @JsonProperty("tanggal_transaksi")
     private String tanggalTransaksi;
     public TransaksiReqVO2(){};
-    public TransaksiReqVO2(String userId, Integer amount){
-        this.userId = userId;
-        this.amount = amount;
-}
+    
 }

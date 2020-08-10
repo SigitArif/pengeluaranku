@@ -37,6 +37,12 @@ public interface UserService{
         return null;
     }
 
+    default UserResVO detail(String auth){
+        return null;
+    }
+
+    
+
     
 
     

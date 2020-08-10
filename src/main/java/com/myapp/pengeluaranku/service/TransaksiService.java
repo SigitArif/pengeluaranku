@@ -16,6 +16,7 @@ import com.myapp.pengeluaranku.repository.PengeluaranRepository;
 import com.myapp.pengeluaranku.repository.TransaksiRepository;
 import com.myapp.pengeluaranku.repository.UserRepository;
 import com.myapp.pengeluaranku.util.ConverterUtil;
+import com.myapp.pengeluaranku.util.JwtDecoder;
 import com.myapp.pengeluaranku.util.ValidationUtil;
 import com.myapp.pengeluaranku.validator.TransaksiValidator;
 import com.myapp.pengeluaranku.vo.TransaksiReqVO;
@@ -42,6 +43,8 @@ UserRepository userRepository;
 TransaksiRepository transaksiRepository;
 @Autowired
 TransaksiMapper transaksiMapper;
+@Autowired
+JwtDecoder jwtDecoder;
 
     public String add(TransaksiReqVO vo){
         String message = transaksiValidator.validateTransaksi(vo);
@@ -69,12 +72,17 @@ TransaksiMapper transaksiMapper;
 		return result;
 	}
 
-	public String addTransaksi(TransaksiReqVO2 vo) {
+	public String addTransaksi(TransaksiReqVO2 vo, String auth) {
+        // validate request
         String message = transaksiValidator.validateTransaksi2(vo);
+        // get email from jwt
+        String email = jwtDecoder.getUsername(auth);        
          if(message!=null) throw new PengeluarankuException(message, HttpStatus.BAD_REQUEST, StatusCode.ERROR);
         Pengeluaran pengeluaran = pengeluaranRepository.findByUuid(vo.getPengeluaranId());
         if(pengeluaran==null) throw new PengeluarankuException("User Not Found", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
-        User user = userRepository.findByUuid(vo.getUserId());
+        
+        // get user from email
+        User user = userRepository.findByEmail(email);
         if(user==null) throw new PengeluarankuException("Pengeluaran Not Found", HttpStatus.BAD_REQUEST, StatusCode.ERROR);
         Date trxDate = ConverterUtil.convertStringTimeStampToDate(vo.getTanggalTransaksi());
 

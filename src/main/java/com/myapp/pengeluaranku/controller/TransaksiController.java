@@ -2,7 +2,7 @@ package com.myapp.pengeluaranku.controller;
 
 import java.util.List;
 
-import com.myapp.pengeluaranku.action.RequestAuth;
+
 import com.myapp.pengeluaranku.enums.StatusCode;
 import com.myapp.pengeluaranku.service.PengeluaranService;
 import com.myapp.pengeluaranku.service.TransaksiService;
@@ -51,11 +51,10 @@ public class TransaksiController{
 
     @PostMapping(value="/add-transaksi")
     @ResponseBody
-    @RequestAuth
     public ResponseEntity<ResultVO> addTransaksi(@RequestBody TransaksiReqVO2 vo, 
             @RequestHeader(value = "Authorization", required = false) String auth){
         ResultVO result = new ResultVO();
-        String results = transaksiService.addTransaksi(vo);
+        String results = transaksiService.addTransaksi(vo, auth);
         result.setMessage(StatusCode.OK.toString());
         result.setResults(results);
         result.setStatus(200);

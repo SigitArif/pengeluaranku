@@ -55,7 +55,7 @@ PengeluaranRepository pengeluaranRepository;
 
     }
     public String validateTransaksi2(TransaksiReqVO2 vo){
-        if(ValidationUtil.isEmptyOrNull(vo.getUserId())) return "User id can't be empty";
+        
         if(ValidationUtil.isEmptyOrNull(vo.getPengeluaranId())) return "Pengeluaran id can't be empty";
         if(ValidationUtil.isEmptyOrNull(vo.getAmount())) return "Amount can't be empty";
         if(ValidationUtil.isEmptyOrNull(vo.getDetailTransaksi())) return "Detail transaksi can't be empty";

@@ -2,6 +2,7 @@ package com.myapp.pengeluaranku.controller;
 
 import javax.validation.Valid;
 
+import com.myapp.pengeluaranku.service.user.UserService;
 import com.myapp.pengeluaranku.service.user.impl.*;
 import com.myapp.pengeluaranku.util.RestUtil;
 import com.myapp.pengeluaranku.vo.*;
@@ -20,16 +21,19 @@ UserEditService userEditService;
 UserDeleteService userDeleteService;
 UserRegisterService userRegisterService;
 UserLoginService userLoginService;
+UserDetailService userDetailService;
+
 
 @Autowired
 public UserController(UserAddService userAddService, UserEditService userEditService, 
                     UserDeleteService userDeleteService, UserRegisterService userRegisterService,
-                    UserLoginService userLoginService){
+                    UserLoginService userLoginService, UserDetailService userDetailService){
    this.userAddService = userAddService;
    this.userEditService = userEditService;
    this.userDeleteService = userDeleteService;
    this.userRegisterService = userRegisterService;
    this.userLoginService = userLoginService;
+   this.userDetailService = userDetailService;
 }
 
     @PostMapping(value="add")
@@ -88,6 +92,19 @@ public UserController(UserAddService userAddService, UserEditService userEditSer
         result.setMessage("Login Success");
         result.setStatus(HttpStatus.SC_OK);
         result.setResults(results);
+        return RestUtil.getJsonResponse(result);
+    }
+
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<ResultVO> detail(@RequestHeader(value = "Authorization", required = false)
+                                            String auth){
+        ResultVO result = new ResultVO();
+        UserResVO results = userDetailService.detail(auth);
+        result.setMessage("User Found");
+        result.setStatus(HttpStatus.SC_OK);
+        result.setResults(results);
+                                                
         return RestUtil.getJsonResponse(result);
     }
 

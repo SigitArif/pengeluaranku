@@ -19,16 +19,16 @@ public class UserServiceTest {
 @Autowired
 UserLoginService userService;
 
-@Test
-public void loginThenSuccess(){
-    LoginVO vo = LoginVO.builder()
-                .id("sigit.arifanggoro@ai.astra.co.id")
-                .password("Demoneyesky0")
-                .statusLogin("EMAIL")
-                .build();
-    AuthResponseVO result = userService.login(vo);
-    assertNotNull(result);
+// @Test
+// public void loginThenSuccess(){
+//     LoginVO vo = LoginVO.builder()
+//                 .id("sigit.arifanggoro@ai.astra.co.id")
+//                 .password("Demoneyesky0")
+//                 .statusLogin("EMAIL")
+//                 .build();
+//     AuthResponseVO result = userService.login(vo);
+//     assertNotNull(result);
     
-}
+// }
     
 }

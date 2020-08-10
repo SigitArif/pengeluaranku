@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-08-05T14:35:19+0700",
+    date = "2020-08-10T08:02:05+0700",
     comments = "version: 1.3.0.Beta2, compiler: javac, environment: Java 11.0.8 (Ubuntu)"
 )
 @Component
@@ -35,6 +35,9 @@ public class UserMapperImpl implements UserMapper {
         }
         if ( model.getEmail() != null ) {
             userResVO.setEmail( model.getEmail() );
+        }
+        if ( model.getUuid() != null ) {
+            userResVO.setUuid( model.getUuid() );
         }
 
         return userResVO;
