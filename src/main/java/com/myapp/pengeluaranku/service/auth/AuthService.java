@@ -1,5 +1,10 @@
 package com.myapp.pengeluaranku.service.auth;
 
-public class AuthService {
-    
+import com.myapp.pengeluaranku.vo.TokenVO;
+import com.myapp.pengeluaranku.vo.keycloak.RefreshTokenReqVO;
+
+public interface AuthService {
+    default public TokenVO refreshToken(RefreshTokenReqVO vo){
+        return null;
+    }
 }

@@ -7,5 +7,6 @@ public enum StatusCode {
     ERROR,
     FAILED,
     DATA_NOT_FOUND,
+    BAD_REQUEST,
     LOGIN_ERROR;
 }
